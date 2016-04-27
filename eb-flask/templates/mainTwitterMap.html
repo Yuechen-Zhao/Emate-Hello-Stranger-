@@ -132,7 +132,7 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization">
       
-      var map, heatmap, pos;
+      var map, heatmap, pos, infoWindow;
       var points = []
       // function initMap() {
       //     map = new google.maps.Map(document.getElementById('map'), {
@@ -153,7 +153,7 @@
           center: {lat: -34.397, lng: 150.644},
           zoom: 6 // originally 2, now is 6
         });
-        var infoWindow = new google.maps.InfoWindow({map: map});
+        infoWindow = new google.maps.InfoWindow({map: map});
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -212,21 +212,46 @@
 
       // Heatmap data: 500 Points, IF DEFAULT IS SELECTED???
       function getPoints() {
-          console.log('hahahahahahahahahahahahaha----------------')
-          option = document.getElementById('myInput').value
-          console.log(option)
-          points = []
+          console.log('hahahahahahahahahahahahaha----------------');
+          option = document.getElementById('myInput').value;
+          console.log(option);
+          points = [];
           if (option == 'default') {
-              return points
+              return points;
           }
+
+          sqr_dist = Number.MAX_SAFE_INTEGER;
+          closest_loc = null;
 
           $.getJSON('getTwits/' + option, function (result) {
               console.log(result)
               $.each(result.data, function (i, line) {
-                  points.push(new google.maps.LatLng(line.latitude, line.longitude));
-                  pointArray = new google.maps.MVCArray(points);
-                  heatmap.setData(pointArray);
+                  // points.push(new google.maps.LatLng(line.latitude, line.longitude));
+                  // pointArray = new google.maps.MVCArray(points);
+                  // heatmap.setData(pointArray);
+                  if ((line.latitude - pos.lat) * (line.latitude - pos.lat) + (line.longitude - pos.lng) * (line.longitude - pos.lng) < sqr_dist) {
+                    sqr_dist = (line.latitude - pos.lat) * (line.latitude - pos.lat) + (line.longitude - pos.lng) * (line.longitude - pos.lng);
+                    closest_loc = new google.maps.LatLng(line.latitude, line.longitude);
+
+                    // console.log('inside the if, updating closest point');
+                    // console.log('sqr_dist : ' + sqr_dist);
+                    // console.log('closest_loc' + closest_loc);
+                  }
               });
+
+              // console.log('OUT OF LOOP closest_loc : ' + closest_loc);
+              if (closest_loc) {
+                points.push(closest_loc);
+                pointArray = new google.maps.MVCArray(points);
+                heatmap.setData(pointArray);
+                infoWindow.setContent('Your location.');
+              } else {
+                // console.log("NO POINTS WITH CERTAIN KEYWORD FOUND.");
+                pointArray = new google.maps.MVCArray(points);
+                heatmap.setData(pointArray);
+                infoWindow.setContent('Sorry, no points with certain keyword found.');
+              }
+
           });
       }
 
