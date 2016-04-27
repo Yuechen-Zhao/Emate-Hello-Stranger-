@@ -9,8 +9,9 @@
     <style type="text/css">
       html, body { height: 100%; margin: 0; padding: 0; }
       #map { height: 60%;
-              width: 70%;
-              margin: 0 auto 0 auto;}
+              width: 60%;
+              margin-left: 0
+            }
 
        body {
             background-image: url("http://wallpoper.com/images/00/44/03/84/soft-colors_00440384.jpg");
@@ -96,22 +97,8 @@
 
 <body>
   <div id="links">
-      <h1>Come On and Find Your E-mate!</h1>
+      <h1>Come Find Your E-mate!</h1>
       <p><b>Search for keyword</b></p>
-
-      <!-- <select id = "dropdown" name="dropdown" onchange="getPoints()">
-        <option value="default">Select One</option>
-        <option value="sunshine">sunshine</option>
-        <option value="rain">rain</option>
-        <option value="snow">snow</option>
-        <option value="basketball">basketball</option>
-        <option value="school">school</option>
-        <option value="love">love</option>
-        <option value="music">music</option>
-        <option value="sushi">sushi</option>
-        <option value="happy">happy</option>
-        <option value="mountain">mountain</option>
-      </select> -->
 
       <input type="text" id="myInput">
       <button onclick="getPoints()">Click me</button>
@@ -134,20 +121,7 @@
       
       var map, heatmap, pos, infoWindow;
       var points = []
-      // function initMap() {
-      //     map = new google.maps.Map(document.getElementById('map'), {
-      //     zoom: 2,
-      //     center: new google.maps.LatLng(37.774546, -122.433523),
-      //     mapTypeId: google.maps.MapTypeId.SATELLITE
-      //   });
-
-      //   heatmap = new google.maps.visualization.HeatmapLayer({
-      //     data: new google.maps.MVCArray(points),
-      //     //map: map
-      //   });
-      //   heatmap.setMap(map)
-      // }
-
+      
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
@@ -226,27 +200,18 @@
           $.getJSON('getTwits/' + option, function (result) {
               console.log(result)
               $.each(result.data, function (i, line) {
-                  // points.push(new google.maps.LatLng(line.latitude, line.longitude));
-                  // pointArray = new google.maps.MVCArray(points);
-                  // heatmap.setData(pointArray);
                   if ((line.latitude - pos.lat) * (line.latitude - pos.lat) + (line.longitude - pos.lng) * (line.longitude - pos.lng) < sqr_dist) {
                     sqr_dist = (line.latitude - pos.lat) * (line.latitude - pos.lat) + (line.longitude - pos.lng) * (line.longitude - pos.lng);
                     closest_loc = new google.maps.LatLng(line.latitude, line.longitude);
-
-                    // console.log('inside the if, updating closest point');
-                    // console.log('sqr_dist : ' + sqr_dist);
-                    // console.log('closest_loc' + closest_loc);
                   }
               });
 
-              // console.log('OUT OF LOOP closest_loc : ' + closest_loc);
               if (closest_loc) {
                 points.push(closest_loc);
                 pointArray = new google.maps.MVCArray(points);
                 heatmap.setData(pointArray);
                 infoWindow.setContent('Your location.');
               } else {
-                // console.log("NO POINTS WITH CERTAIN KEYWORD FOUND.");
                 pointArray = new google.maps.MVCArray(points);
                 heatmap.setData(pointArray);
                 infoWindow.setContent('Sorry, no points with certain keyword found.');

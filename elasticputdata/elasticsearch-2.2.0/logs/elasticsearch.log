@@ -4877,3 +4877,23 @@ Caused by: org.apache.lucene.index.IndexNotFoundException: no segments* file fou
 [2016-04-27 17:22:19,320][INFO ][node                     ] [Jim Hammond] stopped
 [2016-04-27 17:22:19,321][INFO ][node                     ] [Jim Hammond] closing ...
 [2016-04-27 17:22:19,327][INFO ][node                     ] [Jim Hammond] closed
+[2016-04-27 17:27:07,061][INFO ][node                     ] [Gwen Stacy] version[2.2.0], pid[2235], build[8ff36d1/2016-01-27T13:32:39Z]
+[2016-04-27 17:27:07,062][INFO ][node                     ] [Gwen Stacy] initializing ...
+[2016-04-27 17:27:07,495][INFO ][plugins                  ] [Gwen Stacy] modules [lang-expression, lang-groovy], plugins [], sites []
+[2016-04-27 17:27:07,512][INFO ][env                      ] [Gwen Stacy] using [1] data paths, mounts [[/ (/dev/disk1)]], net usable_space [358.6gb], net total_space [464.7gb], spins? [unknown], types [hfs]
+[2016-04-27 17:27:07,512][INFO ][env                      ] [Gwen Stacy] heap size [990.7mb], compressed ordinary object pointers [true]
+[2016-04-27 17:27:09,375][INFO ][node                     ] [Gwen Stacy] initialized
+[2016-04-27 17:27:09,379][INFO ][node                     ] [Gwen Stacy] starting ...
+[2016-04-27 17:27:09,514][INFO ][transport                ] [Gwen Stacy] publish_address {127.0.0.1:9300}, bound_addresses {[fe80::1]:9300}, {[::1]:9300}, {127.0.0.1:9300}
+[2016-04-27 17:27:09,523][INFO ][discovery                ] [Gwen Stacy] elasticsearch/UEJxHfP5RB2Rj9Vt-XYBVQ
+[2016-04-27 17:27:12,574][INFO ][cluster.service          ] [Gwen Stacy] new_master {Gwen Stacy}{UEJxHfP5RB2Rj9Vt-XYBVQ}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-join(elected_as_master, [0] joins received)
+[2016-04-27 17:27:12,610][INFO ][http                     ] [Gwen Stacy] publish_address {127.0.0.1:9200}, bound_addresses {[fe80::1]:9200}, {[::1]:9200}, {127.0.0.1:9200}
+[2016-04-27 17:27:12,611][INFO ][node                     ] [Gwen Stacy] started
+[2016-04-27 17:27:12,651][INFO ][gateway                  ] [Gwen Stacy] recovered [1] indices into cluster_state
+[2016-04-27 17:27:12,992][INFO ][cluster.metadata         ] [Gwen Stacy] [test-index] creating index, cause [api], templates [], shards [5]/[1], mappings []
+[2016-04-27 17:27:13,060][INFO ][cluster.metadata         ] [Gwen Stacy] [test-index] create_mapping [test-type]
+[2016-04-27 17:27:13,167][INFO ][cluster.routing.allocation] [Gwen Stacy] Cluster health status changed from [RED] to [YELLOW] (reason: [shards started [[test-index][4]] ...]).
+[2016-04-27 17:43:40,166][INFO ][node                     ] [Gwen Stacy] stopping ...
+[2016-04-27 17:43:40,323][INFO ][node                     ] [Gwen Stacy] stopped
+[2016-04-27 17:43:40,323][INFO ][node                     ] [Gwen Stacy] closing ...
+[2016-04-27 17:43:40,328][INFO ][node                     ] [Gwen Stacy] closed
